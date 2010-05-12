@@ -17,21 +17,23 @@ title() ->
 
 
 right() ->
-    #panel { class=menu, body=["RIGHT"] }.
+    #panel { class=right, body=["Bla bla bla..."] }.
 
 
 left() ->
-    #panel { class=menu, body=["LEFT"] }.
+    #panel { class=left, body=["Bla bla bla this and that....."] }.
 
 
 header(Selected) ->
     wf:wire(Selected, #add_class { class=selected }),
-    #panel { class=menu, body=[
-        #link { id=home,   url='/',            text="Home"  },
-        #link { id=logout, url='/logout',      text="Logout"  },
-        #link { id=about,  url='/about',       text="About"  }
-    ]}.
-
+    #panel { body = [#h1 { class=header,
+                           text = "<span class='big'>R</span>ed<span class='big'>H</span>ot<span class='big'>E</span>rlang", html_encode=false},
+                     #panel { class=menu, 
+                              body=[#link { id=home,   url='/',            text="Home"  },
+                                    #link { id=logout, url='/logout',      text="Logout"  },
+                                    #link { id=about,  url='/about',       text="About"  }
+                                   ]}
+                    ]}.
 
 footer() ->
     [#br{},
