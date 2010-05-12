@@ -1,0 +1,266 @@
+html {
+	font-size:62.5%;
+}
+
+body {
+	background-color:#eff0e7;
+	margin:0;
+	padding:0;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:1em;
+	line-height:1.6em;
+	color:#595959;
+}
+
+
+
+form {
+	border:0;
+	padding:0;
+	margin:0;
+}
+
+p,
+li,
+input,
+textarea,
+label,
+select {
+	font-size:1.2em;
+}
+
+a img {
+	border:0;
+}
+
+a {
+	outline:none;
+	color:#0c3140;
+}
+
+
+#holder {
+	width:980px;
+	margin:0 auto;
+	padding:0;
+}
+
+// .header {margin:0 10px 0 -10px;}
+
+
+.menu {
+	margin:-40px 0 40px 0;
+	padding:0;
+	list-style-type:none;
+	float:right;
+}
+
+.menu a  {
+	margin:0 0 0 2px;
+	padding:3px 6px;
+	float:left;
+	color:#7d9093;
+	text-transform:uppercase;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+	font-size:9px;
+	text-decoration:none;
+	background-color:#d7d8cf;
+	display:block;
+	padding-left:6px;
+	padding-right:6px;
+}
+
+.big {font-size:120%;color:#d13400;}
+
+
+.menu a:hover {
+	color:#d13400;
+}
+
+
+#header h1 {
+	margin:70px 0 0 0;
+	padding:0;
+	font-size:10px;
+	line-height:10px;
+	background-position:0 0;
+	background-repeat:no-repeat;
+	background-image:url(../img/digital_chili.gif);
+	width:459px;
+	height:15px;
+	text-indent:-9999px;
+}
+
+#header h1 a {
+	width:459px;
+	height:15px;
+	display:block;
+}
+
+#header h2 {
+	margin:23px 0 0 0;
+	padding:0;
+	font-size:10px;
+	line-height:10px;
+	background-position:0 0;
+	background-repeat:no-repeat;
+	background-image:url(../img/copy.gif);
+	width:980px;
+	height:108px;
+	text-indent:-9999px;
+}
+
+
+.espanol #header h2 {
+	background-image:url(../img/copy_spa.gif);
+}
+
+#content {
+	float:left;
+	width:980px;
+	clear:both;
+}
+
+#thecompany {
+	width:367px;
+	margin:0;
+	padding:0;
+	float:right;
+}
+
+#thework {
+	width:584px;
+	margin:0;
+	padding:0;
+	float:left;
+}
+
+#thecompany h2,
+#thework h2 {
+	clear:both;
+	text-transform:uppercase;
+	font-weight:normal;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+	font-size:1.4em;
+	padding:1.5em 0 .3em 0;
+	margin:0;
+	color:#0c3140;
+}
+
+
+#thework h3 {
+	font-weight:normal;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+	font-size:1.2em;
+	padding:1em 0;
+	margin:0;
+}
+
+#thework h3 strong {
+	text-transform:uppercase;
+	font-weight:normal;
+}
+
+
+#thework ul {
+	margin:0 0 2em 0;
+	padding:0;
+	list-style-type:none;
+}
+
+#thework ul li {
+	line-height:1.5em;
+	width:45%;
+	padding:.1em 5% .1em 0;
+	float:left;
+}
+
+#news {
+	display:none;
+}
+
+/* ************** CARROUSEL ************* */
+
+/** 
+ * Slideshow style rules.
+ */
+#slideshow {
+	margin:0 auto;
+	width:584px;
+	height:480px;
+	position:relative;
+}
+#slideshow #slidesContainer {
+  margin:0 auto;
+	width:584px;
+	height:480px;
+  overflow:auto; /* allow scrollbar */
+  position:relative;
+}
+#slideshow #slidesContainer .slide {
+  margin:0 auto;
+  width:584px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
+  height:480px;
+}
+
+/** 
+ * Slideshow controls style rules.
+ */
+.control {
+  display:block;
+  width:25px;
+  height:385px;
+  text-indent:-9999px;
+  position:absolute;
+  cursor: pointer;
+  z-index:10;
+}
+#leftControl {
+  top:10px;
+  right:30px;
+  background-position:10px 5px;
+  background-repeat:no-repeat;
+  background-image:url(../img/ico-back.gif);
+}
+#rightControl {
+  top:10px;
+  right:0;
+  background-position:10px 5px;
+  background-repeat:no-repeat;
+  background-image:url(../img/ico-next.gif);
+}
+
+
+.mosaic {
+}
+
+
+/** 
+ * Style rules for Demo page
+ */
+
+
+#pageContainer {
+  margin:0;
+  width:584px;
+}
+
+
+/* **************** */
+
+#footer {
+	clear:both;
+	float:left;
+	width:980px;
+	margin:4em 0 0 0;
+	padding:1em 0 4em 0;
+	border-top:2px solid #cbd0c2;
+}
+
+
+#footer h3 {
+	color:#91918d;
+	font-weight:normal;
+	font-size:1.1em;
+}
+
