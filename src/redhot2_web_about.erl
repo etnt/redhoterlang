@@ -20,7 +20,7 @@ title() ->
 
 layout() ->
     #container_12 {
-        body=[#grid_12 { class=header, body=redhot2_common:header(home) },
+        body=[#grid_12 { class=header, body=redhot2_common:header(about) },
               #grid_clear {},
 
               #grid_10 { alpha=true, body=about() },
@@ -39,11 +39,9 @@ is version 4.
 <p>
 Now it is making use of <a href='http://nitrogenproject.com/'>Nitrogen 2.0</a>
 and <a href='http://couchdb.apache.org/'>CouchDB</a>. Version 3 implemented a
-desktop like interface, with no visible pages but the top one. I have now
-returned to a more REST like structure.
+desktop like interface, with no visible pages but the top one. In version 4 it
+has returned to a more REST like structure. It has also got a new layout.
 </p>
-
-
 <p>If you would like to try it out or just look at the code, 
 you will find the git repository 
 <a href='http://dev.tornkvist.org/'>here</a>.

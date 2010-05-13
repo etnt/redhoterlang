@@ -15,6 +15,7 @@ routes() ->
     [{"/",            redhot2_web_index}
      , {"/entry",     redhot2_web_entry}
      , {"/about",     redhot2_web_about}
+     , {"/twitter",   redhot2_web_twitter}
      , {"/login",     redhot2_web_login}
      , {"/logout",    redhot2_web_logout}
      , {"/auth",      redhot2_web_auth}

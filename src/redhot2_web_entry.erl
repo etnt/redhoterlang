@@ -32,7 +32,7 @@ title() ->
 
 layout() ->
     #container_12 {
-        body=[#grid_12 { class=header, body=redhot2_common:header(home) },
+        body=[#grid_12 { class=header, body=redhot2_common:header() },
               #grid_clear {},
 
               #grid_10 { alpha=true, body=article() },
@@ -60,11 +60,11 @@ article(Id) ->
     A = proplists:get_value("author",L),
     H = proplists:get_value("html",L),
     Comform = "e_comform",
-    #panel{body=[#span{class="e_date" , text=gtostr(C)},
+    #panel{body=[#panel{class="e_author", body=[#panel{body=[gravatar(author2email(A))]},
+						#panel{body=["by: ",#span{class="blue",text=A}]}]},
+                 #span{class="e_date" , text=gtostr(C)},
                  #span{class="e_title", text=to_latin1(T)},
                  %#panel{class="e_author", body=["by: ",#span{class="blue",text=A}]},
-                 #panel{class="e_author", body=[#panel{body=[gravatar(author2email(A))]},
-						#panel{body=["by: ",#span{class="blue",text=A}]}]},
                  #panel{class="l_body" , body=to_latin1(H)}
 %                 #panel{class="e_comhdr", body=comhdr(Comform,Id)},
 %                 #panel{class=Comform, body=comform(Comform,Id)},

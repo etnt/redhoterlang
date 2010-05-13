@@ -24,6 +24,8 @@
          ,{port, 8283}
 	 ,{log_dir, "/tmp"}
 	 ,{doc_root, "./www"}
+	 ,{twitter_user, "kruskakli"}
+	 ,{twitter_passwd, "mortuta42"}
 	 ,{authors, [{"http://etnt.myopenid.com/" % Claimed OpenID
                      ,"tobbe"                    % Nickname
                      ,"tobbe@tornkvist.org"},    % Email,
