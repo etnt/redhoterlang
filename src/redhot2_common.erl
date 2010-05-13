@@ -10,6 +10,8 @@
          , footer/0
          , right/0
          , left/0
+         , gravatar/1
+         , raw_path/0
         ]).
 
 title() ->
@@ -17,11 +19,23 @@ title() ->
 
 
 right() ->
-    #panel { class=right, body=["Bla bla bla..."] }.
+    #panel { class=right, body=[] }.
 
 
 left() ->
-    #panel { class=left, body=["Bla bla bla this and that....."] }.
+    #panel { class=left, body=[redhot2_nav:list_entries()] }.
+
+raw_path() ->
+    RequestBridge = wf_context:request_bridge(),
+    RequestBridge:uri().
+
+
+
+gravatar(Email) ->
+    #gravatar { email=Email,
+		size="30", 
+		rating="g", 
+		default="identicon" }.
 
 
 header(Selected) ->

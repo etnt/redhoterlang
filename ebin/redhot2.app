@@ -24,12 +24,17 @@
          ,{port, 8283}
 	 ,{log_dir, "/tmp"}
 	 ,{doc_root, "./www"}
-	 ,{acl, ["http://etnt.myopenid.com/"
-                ]}
-         ,{users,[{"http://etnt.myopenid.com/",
-                   [{name, "Torbjorn Tornkvist"}
-                    ,{email, "etnt@redhoterlang.com"}]}
-                 ]}
+	 ,{authors, [{"http://etnt.myopenid.com/" % Claimed OpenID
+                     ,"tobbe"                    % Nickname
+                     ,"tobbe@tornkvist.org"},    % Email,
+                    {"http://mats.cronqvist.myopenid.com/"
+                     ,"masse"                 
+                     ,"masse@cronqvi.st"},
+                    {"http://klacke.myopenid.com/"
+                     ,"klacke"                 
+                     ,"klacke@hyber.org"} 
+                   ]}
+
         ]
   }
 ]}.

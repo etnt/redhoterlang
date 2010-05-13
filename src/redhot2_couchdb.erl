@@ -12,6 +12,7 @@
          ,store_doc/1
          ,store_doc/2
 	 ,update_user/1
+         ,entry/1
         ]).
 
 -export([http_get_req/1
@@ -20,6 +21,7 @@
          ,http_put_req/2
          ,http_put_req/3
          ,find/2
+         ,find/3
         ]).
 
 -import(redhot2, [l2b/1,b2l/1]).
@@ -59,6 +61,9 @@ comments(Id) ->
                      "?descending=true&"
                      "startkey=[\""++b2l(Id)++"\",{}]&"
                      "endkey=[\""++b2l(Id)++"\",0]").
+
+entry(Id) ->
+    get_req(?HOST ++ "/" ++ ?DB_NAME ++ "/" ++b2l(Id)).
 
 %% @doc Create the redhot2 database if it doesn't exist. 
 %%      Also create the views if they don't exist
@@ -180,11 +185,13 @@ update_user(User) ->
     
 
 get_from_couchdb(Url) ->
-    R = http_get_req(Url),
+    R = get_req(Url),
     %% Just preserve the Json
     F = fun(X) -> {true,X} end,
     find(F, ["rows","value"], R).
 
+get_req(Url) ->
+    http_get_req(Url).
 
 %%%
 %%% HTTP access

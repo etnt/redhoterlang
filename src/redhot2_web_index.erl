@@ -23,8 +23,9 @@ layout() ->
         body=[#grid_12 { class=header, body=redhot2_common:header(home) },
               #grid_clear {},
 
-              #grid_6 { alpha=true, body=redhot2_common:left() },
-              #grid_6 { omega=true, body=redhot2_common:right() },
+              #grid_12 { alpha=true, body=redhot2_common:left() },
+%              #grid_8 { alpha=true, body=redhot2_common:left() },
+%              #grid_4 { omega=true, body=redhot2_common:right() },
               #grid_clear {},
               
               #grid_12 { body=redhot2_common:footer() }
