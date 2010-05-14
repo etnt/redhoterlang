@@ -12,6 +12,7 @@
          , twitter_user/0
          , twitter_passwd/0
          , log_dir/0
+         , top_dir/0
          , author2email/1
          , maybe_nick/1
          , to_latin1/1
@@ -39,6 +40,9 @@ mail_from()         -> get_env(mail_from, []).
 twitter_user()      -> get_env(twitter_user, []).
 twitter_passwd()    -> get_env(twitter_passwd, []).
 log_dir()           -> get_env(error_logger_mf_file, "/tmp/redhot").
+
+top_dir() ->
+    filename:join(["/"|lists:reverse(tl(lists:reverse(string:tokens(filename:dirname(code:which(?MODULE)),"/"))))]).
 
 
 author2email(Nick) when is_binary(Nick) ->

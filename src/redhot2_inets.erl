@@ -20,7 +20,7 @@ routes() ->
      , {"/login",     redhot2_web_login}
      , {"/logout",    redhot2_web_logout}
      , {"/auth",      redhot2_web_auth}
-     , {"/ajax",      redhot2_web_ajax}
+     , {"/theme",     redhot2_web_theme}
      , {"/nitrogen",  static_file}
      , {"/js",        static_file}
      , {"/css",       static_file}
