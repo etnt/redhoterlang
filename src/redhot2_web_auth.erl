@@ -13,14 +13,13 @@
 main() -> 
     try
         Dict = wf:session(eopenid_dict),
-        RequestBridge = wf_context:request_bridge(),
-        RawPath = RequestBridge:uri(),
+        RawPath = redhot2_common:raw_path(),
         %% assertion
         true = eopenid_v1:verify_signed_keys(RawPath, Dict),
         ClaimedId = eopenid_lib:out("openid.claimed_id", Dict),
         wf:user(ClaimedId),
         wf:session(authenticated, true),
-        wf:redirect("/")
+        wf:redirect(wf:qs("p"))
     catch
 	_:_Err ->
             io:format("~p: Error(~p), ~p~n",[?MODULE,_Err,erlang:get_stacktrace()]),

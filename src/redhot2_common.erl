@@ -16,6 +16,10 @@
          , logo_text/0
         ]).
 
+
+-define(INDEX_PAGE, redhot2_web_index).
+
+
 title() ->
     "redhot2".
 
@@ -54,11 +58,12 @@ header(Selected) ->
                     ]}.
 
 menu_box() ->
+    P = "p="++wf:url_encode(raw_path()),
     #panel { class=menu, 
-             body=[#link { id=home,    url='/',          text="Home" },
-                   #link { id=twitter, url='/twitter',   text="Twitter" },
-                   #link { id=logout,  url='/logout',    text="Logout" },
-                   #link { id=about,   url='/about',     text="About" }
+             body=[#link { id=home,    url='/',           text="Home" },
+                   #link { id=twitter, url='/twitter',    text="Twitter" },
+                   #link { id=logout,  url="/logout?"++P, text="Logout" },
+                   #link { id=about,   url='/about',      text="About" }
                   ]}.
 
 openid_box() ->
@@ -67,9 +72,12 @@ openid_box() ->
             #panel { class = "openid_box",
                      body = [wf:user()]};
         _ ->
+            Id = claimed_id,
             #panel { class = "openid_box",
-                     body = [#textbox{ class = "openid_login", 
-                                       id    = "claimed_id"}]}
+                     body = [#textbox{ class    = "openid_login", 
+                                       id       = Id,
+                                       postback = {Id,raw_path()},
+                                       delegate = ?INDEX_PAGE}]}
     end.
 
 logo_text() ->

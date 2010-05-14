@@ -11,7 +11,7 @@
 main() -> 
     wf:user(undefined),
     wf:session(authenticated, false),
-    wf:redirect("/").
+    wf:redirect(wf:qs("p")).
 
 
 	

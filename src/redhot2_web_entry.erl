@@ -1,5 +1,5 @@
 %% @author Torbjorn Tornkvist etnt@redhoterlang.com
-%% @copyright YYYY Torbjorn Tornkvist.
+%% @copyright 2010, Torbjorn Tornkvist.
 
 -module(redhot2_web_entry).
 
@@ -60,16 +60,15 @@ article(Id) ->
     A = proplists:get_value("author",L),
     H = proplists:get_value("html",L),
     Comform = "e_comform",
-    #panel{body=[#panel{class="e_author", body=[#panel{body=[gravatar(author2email(A))]},
-						#panel{body=["by: ",#span{class="blue",text=A}]}]},
-                 #span{class="e_date" , text=gtostr(C)},
-                 #span{class="e_title", text=to_latin1(T)},
-                 %#panel{class="e_author", body=["by: ",#span{class="blue",text=A}]},
-                 #panel{class="l_body" , body=to_latin1(H)}
-%                 #panel{class="e_comhdr", body=comhdr(Comform,Id)},
-%                 #panel{class=Comform, body=comform(Comform,Id)},
-%                 #panel{class="l_comments" , 
-%                        body=format_comments(Id)}
+    #panel{body=[#panel{class="e_author", 
+                        body=[#panel{body=[gravatar(author2email(A))]},
+                              #panel{body=["by: ",#span{class="by_who",text=A}]}]},
+                 #span{class="e_date" ,      text=gtostr(C)},
+                 #span{class="e_title",      text=to_latin1(T)},
+                 #panel{class="l_body" ,     body=to_latin1(H)},
+                 #panel{class="e_comhdr",    body=comhdr(Comform,Id)},
+                 #panel{class=Comform,       body=comform(Comform,Id)},
+                 #panel{class="l_comments" , body=format_comments(Id)}
                 ]}.
 
 comhdr(Comform, Id) ->
@@ -92,9 +91,8 @@ comform(_Comform, Id) ->
             wf:wire("com_submit", #event {type=click, postback={comment,Id}, delegate=?MODULE}),
             B;
         _ ->
-            Op = fun() -> nav:mk_article(Id) end,
-% FIXME            push(Op),
-            mk_openid_form(openid_comment_form_text())
+            %mk_openid_form(openid_comment_form_text())
+            openid_comment_form_text()
     end.
 
 
@@ -102,14 +100,13 @@ comform(_Comform, Id) ->
 %%% Format the comments
 %%%
 format_comments(Id) ->
-    F = fun({obj,L}) ->
-                C = proplists:get_value("created", L),
-                T = proplists:get_value("text", L),
-                W = proplists:get_value("who",L),
-                A = proplists:get_value("author",L),
-                {true, {W,C,T,A}}
+    F = fun({obj,L},Acc) ->
+                [C,T,W,A] = 
+                    [proplists:get_value(K,L) 
+                     || K <- ["created","text","who","author"]],
+                [{b2l(W),C,b2l(T),A}|Acc]
         end,
-    Cs = redhot_couchdb:find(F, ["rows","value"], redhot_couchdb:comments(Id)),
+    Cs = lists:foldr(F, [], redhot2_couchdb:comments(Id)),
     G = fun({Who,Created,Text,Author}) ->
                 #panel{class = "c_body",
                        body  = [#panel{class=c_is_author(Author),
@@ -139,14 +136,14 @@ mk_openid_form(Text) ->
     B.
 
 openid_comment_form_text() ->
-    "To avoid spammers you are required to authenticate yourself "
-        "with OpenId. A bit of a hassle perhaps "
-        "but the upside is that you'll be exercising the "
-        "<a href='http://github.com/etnt/eopenid'>eopenid</a> code.".
+    "To avoid spammers you are required to authenticate yourself with OpenId."
+        "<br />A bit of a hassle perhaps but the upside is that you'll be "
+        "exercising the <a href='http://github.com/etnt/eopenid'>eopenid</a> "
+        "code. <br />You'll find the OpenId login entry at the top of the page.".
 
 
 c_is_author(true) -> "c_is_author";
 c_is_author(_)    -> "".
 
-c_txt(true) -> "c_txt c_is_author_txt";
+c_txt(true) -> "c_is_author_txt";
 c_txt(_)    -> "c_txt".

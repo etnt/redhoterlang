@@ -45,6 +45,8 @@ intro_text() ->
         "either in form of tips and tricks from a couple of passionate Erlang "
         "hackers, or in form of some experimental code being run.".
 
+event({claimed_id = Id,RawPath}) ->
+    redhot2_web_login:claimed_id(hd(wf:qs(Id)),RawPath);
 event(Event) ->
     io:format("Event=~p~n",[Event]),
     ok.

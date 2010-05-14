@@ -54,19 +54,15 @@ a {
 	padding:0;
 }
 
-// .header {margin:0 10px 0 -10px;}
-
 .openid_box {margin:25px 0px -25px 0px; padding-left:5px;}
-
 input.openid_login {
    background: url(http://openid.net/login-bg.gif) no-repeat;
    background-color: #fff;
    background-position: 0 50%;
    color: #000;
-   width:95%;
+   width:85%;
+   padding-left: 18px;
 }
-
-
 
 .menu_box {
 	margin:-40px 0 40px 0;
@@ -114,10 +110,39 @@ a:hover.l_title {text-decoration:underline;}
 .e_title {font-size:1em; margin-left:2em; font-weight:bold; letter-spacing:1px; color:black;}
 .e_author {float:left; font-size:0.9em; margin:4em 0 -4em -7em; padding-left:0; font-weight:normal;}
 
+/*
+ * Comments
+ */
+.e_comhdr{margin-left:1.5em; margin-bottom:1em;}
+.comhdr{margin-left:0.5em}
+.e_comform{display:none;margin:2em;}
+textarea.comment {height: 100px; width: 450px;}
+.c_date {font-size:0.9em; color:#d13430; font-weight:bold;}
+.c_who {font-size:0.9em; margin-left:2em; font-weight:bold; color:black;}
+.c_txt {
+    font-size:0.9em; 
+    margin-left:1em; 
+    margin:0.2em 0;
+    padding-left:0.6em; 
+    border-left:2px solid #cbd0c2;
+}
+.c_body {margin-left:2em; margin-top:0.6em;}
+.c_is_author {background-color:#e5ff87;}
+.c_is_author_txt {
+    background-color:#f6feda;
+    font-size:0.9em; 
+    margin-left:1em; 
+    margin:0.2em 0;
+    padding-left:0.6em; 
+}
+.c_is_author:after {margin:0 0.5em 0 1em; content:"Author comment"; font-size:0.80em; text-transform:uppercase;}
+
+
 code {font-size: 110%;line-height:90%;}
 
 a.selected {color:black; background-color:#d7d8cf;}
 
+.by_who {color:black;}
 
 .footer {
 	clear:both;
@@ -128,7 +153,7 @@ a.selected {color:black; background-color:#d7d8cf;}
 	border-top:2px solid #cbd0c2;
 	color:#91918d;
 	font-weight:normal;
-	font-size:1.1em;
+	font-size:70%;
 }
 
 .intro {
