@@ -91,7 +91,6 @@ comform(_Comform, Id) ->
             wf:wire("com_submit", #event {type=click, postback={comment,Id}, delegate=?MODULE}),
             B;
         _ ->
-            %mk_openid_form(openid_comment_form_text())
             openid_comment_form_text()
     end.
 
@@ -119,21 +118,6 @@ format_comments(Id) ->
         end,
     [G(X) || X <- Cs].
 
-
-mk_openid_form(Text) ->
-    B=#panel{class="openid",
-             body = [#panel{body=[Text]},
-                     #panel{class="openid_box",
-                            body=[#panel{body=[#textbox{ class="openid_login", 
-                                                         id="claimed_id", 
-                                                         next="auth" }]},
-                                  #panel{body=[#button{ id="auth", 
-                                                        text="Authenticate"}]}]}
-                    ]},
-    wf:wire("auth", #event {type=click, 
-                            postback=claimed_id, 
-                            delegate=?MODULE}),
-    B.
 
 openid_comment_form_text() ->
     "To avoid spammers you are required to authenticate yourself with OpenId."

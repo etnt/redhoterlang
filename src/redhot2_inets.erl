@@ -17,6 +17,7 @@ routes() ->
      , {"/about",     redhot2_web_about}
      , {"/twitter",   redhot2_web_twitter}
      , {"/new",       redhot2_web_new}
+     , {"/edit",      redhot2_web_edit}
      , {"/web",       redhot2_web_bwcompat}
      , {"/login",     redhot2_web_login}
      , {"/logout",    redhot2_web_logout}

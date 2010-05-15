@@ -16,13 +16,19 @@
          , author2email/1
          , maybe_nick/1
          , to_latin1/1
+         , process_markdown/1
+	 , gnow/0
          , gtostr/1
          , gtostr/2
+         , gdate2datetime/1
+         , rfc3339/0
+         , rfc3339/1
          , hostname/0
          , default_port/0
          , i2l/1
          , b2l/1
          , l2b/1
+         , replace/2
         ]).
 
 -import(redhot2_deps, [get_env/2]).
@@ -65,7 +71,49 @@ to_latin1(Str) when is_binary(Str) ->
         []   -> Str;
         Lstr -> Lstr
     end.
+
+
+process_markdown(Txt) when is_binary(Txt) ->
+    {A,B,C} = erlang:now(),
+    Fname = i2l(A)++i2l(B)++i2l(C),
+    Path = filename:join(["/tmp", Fname]),
+    Res = Path++".res",
+    file:write_file(Path, Txt),
+    os:cmd("markdown "++Path++" > "++Res),
+    {ok, Result} = file:read_file(Res),
+    os:cmd(" rm -f "++Path++" "++Res),
+    Result.
+
+rfc3339() ->
+    rfc3339(calendar:now_to_local_time(now())).
+
+rfc3339(Gsec) when is_integer(Gsec) ->
+    rfc3339(gdate2datetime(Gsec));
+
+rfc3339({{Year, Month, Day}, {Hour, Min, Sec}}) ->
+    io_lib:format("~4..0w-~2..0w-~2..0wT~2..0w:~2..0w:~2..0w~s",
+                  [Year,Month,Day, Hour, Min, Sec, zone()]).  
+
+zone() ->
+    Time = erlang:universaltime(),
+    LocalTime = calendar:universal_time_to_local_time(Time),
+    DiffSecs = calendar:datetime_to_gregorian_seconds(LocalTime) -
+        calendar:datetime_to_gregorian_seconds(Time),
+    zone(DiffSecs div 3600, (DiffSecs rem 3600) div 60).
+
+zone(Hr, Min) when Hr < 0; Min < 0 ->
+    io_lib:format("-~2..0w~2..0w", [abs(Hr), abs(Min)]);
+zone(Hr, Min) when Hr >= 0, Min >= 0 ->
+    io_lib:format("+~2..0w~2..0w", [Hr, Min]).
+
+
+
           
+%%-----------------------------------------------------------------------------
+%% @doc Return gregorian seconds as of now()
+%%-----------------------------------------------------------------------------
+gnow() ->
+    calendar:datetime_to_gregorian_seconds(calendar:local_time()).
 
 %%-----------------------------------------------------------------------------
 %% @spec gtostr(Gsecs::greg_secs()) -> string()
@@ -117,6 +165,10 @@ gtostr(Secs, iso8601) ->
     lists:flatten(io_lib:format("~w~2.2.0w~2.2.0wT~2.2.0w~2.2.0w~2.2.0w",
 				[Year, Month, Day, Hour, Minute, Second])).
 
+gdate2datetime(Secs) ->
+    calendar:gregorian_seconds_to_datetime(Secs).
+
+
 default_port() -> 8080.
 
 hostname() ->
@@ -132,3 +184,6 @@ b2l(L) when is_list(L)   -> L.
 l2b(L) when is_list(L)   -> list_to_binary(L);
 l2b(B) when is_binary(B) -> B.
 
+replace({K,_}=H, [{K,_}|T]) -> [H|T];
+replace(X, [H|T])           -> [H|replace(X,T)];
+replace(_, [])              -> [].

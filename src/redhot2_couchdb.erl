@@ -10,9 +10,11 @@
 	 ,comments/0
 	 ,comments/1
          ,store_doc/1
-         ,store_doc/2
+         ,update_doc/2
 	 ,update_user/1
          ,entry/1
+         ,new_blog_entry/4
+         ,store_blog_entry/6
         ]).
 
 -export([http_get_req/1
@@ -24,7 +26,11 @@
          ,find/3
         ]).
 
--import(redhot2, [l2b/1,b2l/1]).
+-import(redhot2, 
+        [gnow/0
+         , rfc3339/1
+         , l2b/1
+         , b2l/1]).
 
 
 -define(DB_NAME, "eblog").
@@ -161,19 +167,30 @@ no_of_comments_reduce() ->
     };".
 
 
+new_blog_entry(Title, Markdown, Html, Author) ->
+    store_blog_entry(Title, Markdown, Html, Author, false, gnow()).
+
+store_blog_entry(Title, Markdown, Html, Author, Published, Created) ->
+    KVs = [{"title", Title},
+           {"markdown", Markdown},
+           {"html", Html},
+           {"type", <<"blog">>},
+           {"author", Author},
+           {"published", Published},
+           {"created", Created},
+           {"created_tz", l2b(lists:flatten(rfc3339(Created)))}],
+    store_doc(KVs).
 
 %%
 %% @doc Take a key-value tuple list and store it as a new CouchDB document.
 %%
 store_doc(KeyValList) ->
-    store_doc(KeyValList, redhot2:gnow()).
-
-store_doc(KeyValList, Created) ->
-    Z = [{"gsec", Created},
-         {"created_tz", l2b(lists:flatten(redhot2:rfc3339(Created)))}
-         | KeyValList],
-    Body = rfc4627:encode({obj, Z}),
+    Body = rfc4627:encode({obj, KeyValList}),
     http_post_req(?HOST ++"/"++ ?DB_NAME, Body).
+
+update_doc(Id, KeyValList) ->
+    Body = rfc4627:encode({obj, KeyValList}),
+    http_put_req(?HOST ++"/"++ ?DB_NAME ++"/"++b2l(Id), Body).
 
 
 %%

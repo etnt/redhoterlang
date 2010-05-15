@@ -16,7 +16,13 @@
 
 
 event({entry,Id}) ->
-    wf:redirect("/entry/"++b2l(Id)).
+    wf:redirect("/entry/"++b2l(Id));
+event({edit,Id}) ->
+    wf:redirect("/edit/"++b2l(Id));
+event(Event) ->
+    io:format("~p: Event = ~p~n",[?MODULE,Event]),
+    wf:redirect("/").
+    
 
 
 list_entries() ->

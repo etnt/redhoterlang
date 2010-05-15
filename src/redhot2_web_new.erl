@@ -9,10 +9,16 @@
          , title/0
          , layout/0
 	 , event/1
+         , mk_entry_form/5
 	]).
 
 -import(redhot2,
         [authors/0
+         , process_markdown/1
+         , maybe_nick/1
+         , to_latin1/1
+         , l2b/1
+         , replace/2
         ]).
 
 main() ->
@@ -46,8 +52,44 @@ intro_text() ->
         "Get in touch if you want to join as an author and you think you fulfill the requirement.".
 
 
-event({claimed_id = Id,RawPath}) ->
-    redhot2_web_login:claimed_id(hd(wf:qs(Id)),RawPath);
+event(new_entry) ->
+    case wf:session(authenticated) of
+        true ->
+            [Title] = wf:qs("new_title"),
+            [Text]  = wf:qs("new_text"),
+            Btxt    = l2b(Text),
+            redhot2_couchdb:new_blog_entry(l2b(Title), 
+                                           Btxt, 
+                                           process_markdown(Btxt), 
+                                           l2b(maybe_nick(wf:user()))),
+            wf:redirect("/");
+        _ ->
+            wf:redirect("/new")
+    end;
+event(updated_entry) ->
+    case wf:session(authenticated) of
+        true ->
+            [Title] = wf:qs("new_title"),
+            [Text]  = wf:qs("new_text"),
+            [Id]    = wf:qs("id"),
+            [Rev]   = wf:qs("rev"),
+            PubBool = case wf:qs("publish") of
+                          ["on"] -> true;
+                          _      -> false
+                      end,
+            Btxt = l2b(Text),
+            {obj,L} = redhot2_couchdb:entry(Id),
+            L2 = lists:foldl(fun(T,Acc) -> replace(T,Acc) end, L, 
+                             [{"title", l2b(Title)},
+                              {"published", PubBool},
+                              {"markdown", l2b(Btxt)},
+                              {"html", process_markdown(Btxt)},
+                              {"_rev", l2b(Rev)}]),
+            redhot2_couchdb:update_doc(Id, L2),
+            wf:redirect("/");
+        _ ->
+            wf:redirect("/")
+    end;
 event(Event) ->
     io:format("Event=~p~n",[Event]),
     ok.
@@ -77,14 +119,17 @@ openid_text() ->
 mk_entry_form(Title, Markdown, Postback) ->
     mk_entry_form(Title, Markdown, Postback, "", "").
 
+%% Exported - also used when editing
 mk_entry_form(Title, Markdown, Postback, Id, Rev) ->
     Mid = wf:temp_id(),
 
     L = [#panel{body=[markdown_help()], class="mdown_help"},
 	 #panel{body=[#checkbox { id="publish", text="Publish"}, 
 		      #link     { id=Mid, class="mdown_help_link", text="Markdown Help"}]},
-	 #panel{body=[#textbox  { id="new_title", class="new", text=Title,     next="new_text" }]},
-	 #panel{body=[#textarea { id="new_text",  class="new", text=Markdown, html_encode=false}]},
+	 #panel{body=[#textbox  { id="new_title", class="new", 
+                                  text=to_latin1(Title), next="new_text" }]},
+	 #panel{body=[#textarea { id="new_text",  class="new", 
+                                  text=to_latin1(Markdown), html_encode=false}]},
 	 #panel{body=[#hidden   { id="id",  text=Id}]},
 	 #panel{body=[#hidden   { id="rev", text=Rev}]},
 	 #panel{body=[#button   { id="new_submit",text="Submit"}]}],
