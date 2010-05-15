@@ -48,7 +48,7 @@ header() ->
     header(none).
 
 header(Selected) ->
-    lists:member(Selected,[home,twitter,logout,about]) andalso
+    lists:member(Selected,[home,twitter,logout,new,about]) andalso
         wf:wire(Selected, #add_class { class=selected }),
     #panel { body = [#h1 { class = "header",
                            text  = logo_text(), html_encode=false},
@@ -63,6 +63,7 @@ menu_box() ->
              body=[#link { id=home,    url='/',           text="Home" },
                    #link { id=twitter, url='/twitter',    text="Twitter" },
                    #link { id=logout,  url="/logout?"++P, text="Logout" },
+                   #link { id=new,     url='/new',        text="New" },
                    #link { id=about,   url='/about',      text="About" }
                   ]}.
 

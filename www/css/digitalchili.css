@@ -35,7 +35,7 @@ input,
 textarea,
 label,
 select {
-	font-size:1.2em;
+	font-size:1.1em;
 }
 
 a img {
@@ -60,7 +60,9 @@ input.openid_login {
    background-color: #fff;
    background-position: 0 50%;
    color: #000;
-   width:85%;
+   width:145px;
+   margin-right: 5px;
+   float: right;
    padding-left: 18px;
 }
 
@@ -174,6 +176,18 @@ a.selected {color:black; background-color:#d7d8cf;}
 
 .tw_search {padding:0.5em;}
 
+/*
+ * The Markdown help
+ */
+.mdown_help {font-size:1.0em; display:none;}
+.mdown_help_link {font-size:0.9em; margin-top:-4px; margin-left:50%;}
+
+/*
+ * The New area.
+ */
+input.new {width: 550px;}
+textarea.new {height: 550px; width: 550px;}
+.button {margin-top: 5px;}
 
 
 
