@@ -50,7 +50,9 @@ header() ->
 header(Selected) ->
     lists:member(Selected,[home,twitter,logout,new,about]) andalso
         wf:wire(Selected, #add_class { class=selected }),
-    #panel { body = [#h1 { class = "header",
+    #panel { body = [#image{image="/images/chili-small.png", 
+                            class="chili_logo"},                     
+                     #h1 { class = "header",
                            text  = logo_text(), html_encode=false},
                      #panel { class = "menu_box",
                               body  = [menu_box(),

@@ -86,12 +86,12 @@ sopcast(Id) ->
 
 sopcast_text() ->
     "<a href=\"http://www.sopcast.com/info/sop.html\">SopCast</a> "
-        " is a simple, free way to broadcast video and audio "
-        "or watch the video and listen to radio on the Internet. "
-        "Adopting P2P(Peer-to-Peer) technology, It is very efficient and "
-        "easy to use. By clicking on the Sopcast icon above you will invoke "
+        " is a simple and free P2P(Peer-to-Peer) technolog that makes "
+        "it possible  to broadcast video and audio. "
+        "By clicking on the Sopcast icon above you will invoke "
         "the <em>Sopcast</em> page that displays some sport events that are to "
-        "be broadcasted. So, let's say you want to watch that Champions League "
+        "be broadcasted (nb: the page loads slow, ~10 sec). "
+        "So, let's say you want to watch that Champions League "
         "match, but it isn't broadcasted on any of your TV channels; then see "
         "if the match is Sopcasted, fire up a client and paste in the link! "
         "If you want to bookmark the Sopcast page you can use "
