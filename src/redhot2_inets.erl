@@ -15,7 +15,9 @@ routes() ->
     [{"/",            redhot2_web_index}
      , {"/entry",     redhot2_web_entry}
      , {"/about",     redhot2_web_about}
+     , {"/projects",  redhot2_web_projects}
      , {"/twitter",   redhot2_web_twitter}
+     , {"/sopcast",   redhot2_web_sopcast}
      , {"/new",       redhot2_web_new}
      , {"/edit",      redhot2_web_edit}
      , {"/web",       redhot2_web_bwcompat}
@@ -26,6 +28,7 @@ routes() ->
      , {"/nitrogen",  static_file}
      , {"/js",        static_file}
      , {"/css",       static_file}
+     , {"/images",    static_file}
     ].
 
 start_link() ->

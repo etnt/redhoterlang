@@ -61,7 +61,7 @@ menu_box() ->
     P = "p="++wf:url_encode(raw_path()),
     #panel { class=menu, 
              body=[#link { id=home,    url='/',           text="Home" },
-                   #link { id=twitter, url='/twitter',    text="Twitter" },
+                   #link { id=projects,url='/projects',   text="Projects" },
                    #link { id=logout,  url="/logout?"++P, text="Logout" },
                    #link { id=new,     url='/new',        text="New" },
                    #link { id=about,   url='/about',      text="About" }

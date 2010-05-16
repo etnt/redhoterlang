@@ -176,6 +176,15 @@ a.selected {color:black; background-color:#d7d8cf;}
 
 .tw_search {padding:0.5em;}
 
+.icon_twitter {margin:1em -1em 0 1em; width:10%;}
+.icon_sopcast {margin:1em -1em 0 1em; width:6%;}
+.proj_txt {margin-left:3em; width:65%;}
+
+.sopcast_sport{padding-bottom: 1em; font-weight:bold; text-decoration:underline;}
+.sopcast_hdr {margin-left:2em; padding: 0.5em 0 0.5em 0; text-decoration:underline;}
+.sopcast_links {margin-left:4em;}
+
+
 /*
  * The Markdown help
  */

@@ -16,7 +16,8 @@ main() ->
         {ok, Bin} = file:read_file(Fname),
         wf:status_code(200),
         set_content_disposition("style.css"),
-        wf:content_type("text/css"),
+        %wf:header(content_type,"text/css"), % inets wants 'content_type'....
+        wf:content_type("text/css"), % works with my patched nitrogen repo
         [Bin]
     catch
         _:_ ->
