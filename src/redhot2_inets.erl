@@ -38,7 +38,7 @@ start_link() ->
         inets:start(httpd,
                     [{port, redhot2_deps:get_env(port, redhot2:default_port())}
                      ,{server_name,  redhot2_deps:get_env(hostname, redhot2:hostname())}
-                     ,{bind_address,  redhot2_deps:get_env(ip, {127,0,0,1})}
+	             ,{bind_address, redhot2_deps:get_env(ip, {127,0,0,1})}
                      ,{server_root, "."}
                      ,{document_root, redhot2_deps:get_env(doc_root,"./www")}
                      ,{modules, [?MODULE]}

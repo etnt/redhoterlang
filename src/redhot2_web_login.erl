@@ -13,8 +13,8 @@
 claimed_id(ClaimedId0,ReturnPage) ->
     try
 	ClaimedId    = eopenid_lib:http_path_norm(ClaimedId0),
-        HostName     = redhot2_deps:get_env(hostname, redhot2:hostname()),
-        Port         = redhot2_deps:get_env(port, redhot2:default_port()),
+        HostName     = redhot2_deps:get_env(external_hostname, redhot2:hostname()),
+        Port         = redhot2_deps:get_env(external_port, redhot2:default_port()),
         URL          = "http://"++HostName++":"++redhot2:i2l(Port),
         Dict0        = eopenid_lib:foldf(
                          [eopenid_lib:in("openid.return_to", 

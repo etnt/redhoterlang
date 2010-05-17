@@ -36,15 +36,16 @@
 
   % configuration parameters similar to those in the config file specified on the command line
   {env, [{ip, {127,0,0,1}}
+	 ,{hostname, "www.redhoterlang.com"}
          ,{port, 8282}
+	 ,{external_hostname, "www.redhoterlang.com"}
+         ,{external_port, 80}
 	 ,{log_dir, "/tmp"}
 	 ,{doc_root, "./www"}
-	 ,{acl, ["http://etnt.myopenid.com/"
-                ]}
-         ,{users,[{"http://etnt.myopenid.com/",
-                   [{name, "Torbjorn Tornkvist"}
-                    ,{email, "etnt@redhoterlang.com"}]}
-                 ]}
+         ,{authors, [{"http://etnt.myopenid.com/" % Claimed OpenID
+                     ,"tobbe"                     % Nickname
+                     ,"tobbe@tornkvist.org"}      % Email,
+                    ]}
         ]
   }
 ]}.
