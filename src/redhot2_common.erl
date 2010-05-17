@@ -21,7 +21,7 @@
 
 
 title() ->
-    "redhot2".
+    "RedHotErlang".
 
 
 right() ->
