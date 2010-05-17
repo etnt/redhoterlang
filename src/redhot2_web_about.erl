@@ -40,15 +40,13 @@ is version 4.
 Now it is making use of <a href='http://nitrogenproject.com/'>Nitrogen 2.0</a>
 and <a href='http://couchdb.apache.org/'>CouchDB</a>. Version 3 implemented a
 desktop like interface, with no visible pages but the top one. In version 4 it
-has returned to a more REST like structure. It has also got a new layout.
+has returned to a more page based structure. It has also got a new layout and has
+become theme-able. So if you come up with a new theme, do send it to me and I'll
+add it to the theme page :-)
 </p>
 <p>If you would like to try it out or just look at the code, 
-you will find the git repository 
-<a href='http://dev.tornkvist.org/'>here</a>.
-To checkout the code with git, run:</p>
-<pre>
-      git clone git://dev.tornkvist.org/redhot
-</pre>    
+you will find a hg repository 
+<a href='http://bitbucket.org/etnt/redhoterlang/'>here</a>.
 
 <p>Note that this is still work in progress...</p>". % " emacs mode bug ?
 
