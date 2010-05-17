@@ -1,15 +1,15 @@
 html {
-	font-size:75%;
+    font-size:75%;
 }
 
 body {
-	background-color:#eff0e7;
-	margin:0;
-	padding:0;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size:1em;
-	line-height:1.6em;
-	color:#595959;
+    background-color:#eff0e7;
+    margin:0;
+    padding:0;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size:1em;
+    line-height:1.6em;
+    color:#595959;
 }
 
 h1.header {
@@ -176,9 +176,11 @@ a.selected {color:black; background-color:#d7d8cf;}
 
 .tw_search {padding:0.5em;}
 
+.icon_theme {margin:1em 0 0 -3em; width:10%;}
 .icon_twitter {margin:1em -1em 0 1em; width:10%;}
 .icon_sopcast {margin:1em -1em 0 1em; width:6%;}
 .proj_txt {margin-left:3em; width:65%;}
+.proj_themes {margin:0 0 1em 3em; width:65%;}
 
 .sopcast_sport{padding-bottom: 1em; font-weight:bold; text-decoration:underline;}
 .sopcast_hdr {margin-left:2em; padding: 0.5em 0 0.5em 0; text-decoration:underline;}

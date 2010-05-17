@@ -11,6 +11,8 @@
 	 , event/1
 	]).
 
+-import(redhot2_common, [logo_text/0]).
+
 
 main() ->
     #template { file="./templates/grid.html" }.
@@ -42,6 +44,8 @@ intro_text() ->
         ++ redhot2_common:logo_text() ++".".
 
 projects() ->
+    Theme = theme_chooser(),
+
     TwId = wf:temp_id(),
     Twitter = twitter(TwId),
     wf:wire(TwId, #event {type=click, postback=twitter, delegate=?MODULE}),
@@ -49,11 +53,12 @@ projects() ->
     SpId = wf:temp_id(),
     Sopcast = sopcast(SpId),
     wf:wire(SpId, #event {type=click, postback=sopcast, delegate=?MODULE}),
-    #panel{body=[Twitter,Sopcast]}.
+    #panel{body=[Theme,Twitter,Sopcast]}.
 
 
-event(theme) ->
-    wf:redirect("/theme");
+event({theme, Theme}) ->
+    wf:session(theme, Theme),
+    wf:redirect("/projects");
 event(twitter) ->
     wf:redirect("/twitter");
 event(sopcast) ->
@@ -62,6 +67,20 @@ event(Event) ->
     ?PRINT(Event),
     wf:redirect("/?error_msg").
 
+theme_chooser() ->
+    #panel{body=[#image{image="/images/chili-small.png",class="icon_theme"},
+                 #panel{class="proj_themes", 
+                        body=themes()}]}.
+    
+themes() ->
+    [#panel{body=[#link{class="theme", text="DigitalChili", 
+                        postback={theme,"digitalchili"}, delegate=?MODULE },
+                  " is the (new) default look of "++logo_text()]}
+     , #panel{body=[#link{class="theme", text="WhiteChili", 
+                          postback={theme,"whitechili"}, delegate=?MODULE },
+                    " very similar to the default but more whiteish... "]}
+    ].
+     
 
 twitter(Id) ->
     #panel{body=[#link{body=#image{image="/images/twitter_logo.png",class="icon_twitter"},
