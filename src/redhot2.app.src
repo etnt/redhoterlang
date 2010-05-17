@@ -1,6 +1,6 @@
 {application, redhot2, 
  [
-  {description,  "redhot2 - bla bla..."},
+  {description,  "redhot2 - The redhoterlang.com blog."},
 
   % The Module and Args used to start this application.
   {mod, { redhot2_app, []} },
@@ -17,6 +17,21 @@
     ,redhot2_web_login
     ,redhot2_web_logout
     ,redhot2_web_auth
+    ,redhot2_couchdb
+    ,redhot2_nav
+    ,redhot2_twitter
+    ,redhot2_web_about
+    ,redhot2_web_atom
+    ,redhot2_web_bwcompat
+    ,redhot2_web_edit
+    ,redhot2_web_entry
+    ,redhot2_web_new
+    ,redhot2_web_projects
+    ,redhot2_web_sopcast
+    ,redhot2_web_theme
+    ,redhot2_web_twitter
+    ,mysopcast
+    ,rfc4627
    ]},
 
   % configuration parameters similar to those in the config file specified on the command line
