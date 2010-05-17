@@ -136,7 +136,7 @@ ids_map() ->
 atom_map() ->
     "function(doc) { 
       if (doc.type == 'blog' & doc.published) { 
-        var summary = doc.html.substring(0,250) + '...';
+        var summary = doc.markdown.substring(0,250) + '...';
         var s = summary.replace(/&/g,'&amp;').replace(/\</g,'&lt;').replace(/\>/g,'&gt;');
         var e = '<entry>\n'+
                 ' <title>'+doc.title+'</title>\n'+

@@ -17,6 +17,8 @@ main() ->
         [_,"plink"|_] -> 
             % v.3 used /web/plink?id=.... for permalinks
             wf:redirect("/entry/"++wf:qs("id"));
+        [_,"atom"|_] -> 
+            redhot2_web_atom:main();
         _ -> 
             wf:redirect("/fixme_error_msg_here")
     end.

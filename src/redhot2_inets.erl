@@ -25,6 +25,7 @@ routes() ->
      , {"/logout",    redhot2_web_logout}
      , {"/auth",      redhot2_web_auth}
      , {"/theme",     redhot2_web_theme}
+     , {"/atom",      redhot2_web_atom}
      , {"/nitrogen",  static_file}
      , {"/js",        static_file}
      , {"/css",       static_file}
