@@ -35,7 +35,7 @@
    ]},
 
   % configuration parameters similar to those in the config file specified on the command line
-  {env, [{ip, "0.0.0.0"}
+  {env, [{ip, {127,0,0,1}}
          ,{port, 8282}
 	 ,{log_dir, "/tmp"}
 	 ,{doc_root, "./www"}
