@@ -78,7 +78,8 @@ themes() ->
                   " is the (new) default look of "++logo_text()]}
      , #panel{body=[#link{class="theme", text="WhiteChili", 
                           postback={theme,"whitechili"}, delegate=?MODULE },
-                    " very similar to the default but more whiteish... "]}
+                    " very similar to the default but more whiteish and it also "
+                    "plays with the <b>@font-face</b> CSS directive."]}
     ].
      
 

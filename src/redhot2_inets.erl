@@ -30,6 +30,7 @@ routes() ->
      , {"/js",        static_file}
      , {"/css",       static_file}
      , {"/images",    static_file}
+     , {"/type",      static_file}
     ].
 
 start_link() ->
