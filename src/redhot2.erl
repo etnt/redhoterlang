@@ -13,6 +13,7 @@
          , twitter_passwd/0
          , log_dir/0
          , top_dir/0
+         , is_valid_author/2
          , author2email/1
          , maybe_nick/1
          , to_latin1/1
@@ -50,6 +51,14 @@ log_dir()           -> get_env(error_logger_mf_file, "/tmp/redhot").
 top_dir() ->
     filename:join(["/"|lists:reverse(tl(lists:reverse(string:tokens(filename:dirname(code:which(?MODULE)),"/"))))]).
 
+
+is_valid_author(Author, Who) when is_binary(Author) orelse is_binary(Who) -> 
+    is_valid_author(b2l(Author), b2l(Who));
+is_valid_author(Author, Who) when is_list(Author) orelse is_list(Who) ->
+    case lists:keysearch(Author, 2, authors()) of
+        {value,{Who, _Nick, _Email}} -> true;
+        _                            -> false
+    end.
 
 author2email(Nick) when is_binary(Nick) ->
     author2email(b2l(Nick));

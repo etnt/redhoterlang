@@ -42,6 +42,7 @@
          ,{external_port, 80}
 	 ,{log_dir, "/tmp"}
 	 ,{doc_root, "./www"}
+         ,{mail_from, "MAILADDRESS"}
          ,{authors, [{"http://etnt.myopenid.com/" % Claimed OpenID
                      ,"tobbe"                     % Nickname
                      ,"tobbe@tornkvist.org"}      % Email,

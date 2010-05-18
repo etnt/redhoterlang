@@ -15,6 +15,7 @@
          ,entry/1
          ,new_blog_entry/4
          ,store_blog_entry/6
+         ,store_comment/5
         ]).
 
 -export([http_get_req/1
@@ -32,6 +33,7 @@
          , l2b/1
          , b2l/1]).
 
+-define(is_bool(B), (B == true orelse B == false)).
 
 -define(DB_NAME, "eblog").
 %%-define(DB_NAME, "rh2").
@@ -178,6 +180,18 @@ store_blog_entry(Title, Markdown, Html, Author, Published, Created) ->
            {"author", Author},
            {"published", Published},
            {"created", Created},
+           {"created_tz", l2b(lists:flatten(rfc3339(Created)))}],
+    store_doc(KVs).
+
+store_comment(Ref, Text, Who, Created, Author)
+  when is_binary(Ref), is_binary(Text), is_binary(Who),
+       is_integer(Created), ?is_bool(Author) ->
+    KVs = [{"type",<<"comment">>},
+           {"ref",Ref}, 
+           {"text",Text}, 
+           {"who",Who},
+           {"author",Author},
+           {"created",Created},
            {"created_tz", l2b(lists:flatten(rfc3339(Created)))}],
     store_doc(KVs).
 

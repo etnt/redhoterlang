@@ -13,10 +13,14 @@
 
 -import(redhot2,
         [author2email/1
+         , is_valid_author/2
          , maybe_nick/1
+         , mail_from/0
          , gtostr/1
          , to_latin1/1
          , b2l/1
+         , l2b/1
+         , gnow/0
         ]).
 
 -import(redhot2_common,
@@ -42,6 +46,28 @@ layout() ->
               #grid_12 { body=redhot2_common:footer() }
              ]}.
 
+
+event({comment, Id}) ->
+    case {wf:session(authenticated), wf:user()} of
+        {true, Who} ->
+            [Text] = wf:qs("com_text"),
+            {obj,L} = redhot2_couchdb:entry(Id),
+            Author = proplists:get_value("author",L),
+            Title = proplists:get_value("title",L),
+            redhot2_couchdb:store_comment(l2b(Id), 
+                                          l2b(Text), 
+                                          l2b(maybe_nick(Who)), 
+                                          gnow(), 
+                                          is_valid_author(Author, Who)),
+            Email = author2email(Author),
+            spawn(fun() -> redhot2_sendmail:send(Email, mail_from(), 
+                                                 "New Comment...", 
+                                                 "...on your article: "++Title) 
+                  end),
+            wf:redirect("/entry/"++Id);
+        _ ->
+            wf:redirect("/entry/"++Id)
+    end;
 event(Event) ->
     io:format("Event=~p~n",[Event]),
     ok.
