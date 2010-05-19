@@ -76,10 +76,18 @@ themes() ->
     [#panel{body=[#link{class="theme", text="DigitalChili", 
                         postback={theme,"digitalchili"}, delegate=?MODULE },
                   " is the (new) default look of "++logo_text()]}
+
      , #panel{body=[#link{class="theme", text="WhiteChili", 
                           postback={theme,"whitechili"}, delegate=?MODULE },
                     " very similar to the default but more whiteish and it also "
                     "plays with the <b>@font-face</b> CSS directive."]}
+
+     , #panel{body=[#link{class="theme", text="Cantarell", 
+                          postback={theme,"cantarell"}, delegate=?MODULE },
+                    " very similar to the default but is using the "
+                    "<a href='http://code.google.com/webfonts/'>Google Font API</a> "
+                    "and a touch of <a href='http://gitready.com/'>GitReady</a>."
+                   ]}
     ].
      
 

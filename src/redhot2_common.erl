@@ -54,7 +54,7 @@ header() ->
     header(none).
 
 header(Selected) ->
-    lists:member(Selected,[home,twitter,login,logout,new,about]) andalso
+    lists:member(Selected,[home,twitter,projects,new,about]) andalso
         wf:wire(Selected, #add_class { class=selected }),
     #panel { body = [#image{image="/images/chili-small.png", 
                             class="chili_logo"},                     

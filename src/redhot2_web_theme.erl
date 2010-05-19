@@ -31,6 +31,7 @@ theme_filename() ->
     case wf:session(theme) of
         "digitalchili" -> "digitalchili.css";
         "whitechili"   -> "whitechili.css";
+        "cantarell"    -> "cantarell.css";
         _              -> "digitalchili.css"
     end.
 
