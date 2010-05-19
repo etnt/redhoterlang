@@ -6,6 +6,7 @@
 -include_lib ("nitrogen/include/wf.hrl").
 
 -export([title/0
+         , event/1
          , header/0
          , header/1
          , footer/0
@@ -23,6 +24,11 @@
 title() ->
     "RedHotErlang".
 
+event(login) ->
+    wf:wire(openid_box_id(), #appear { speed=5000 });
+event(Event) ->
+    io:format("~p: Event=~p~n",[?MODULE,Event]),
+    ok.
 
 right() ->
     #panel { class=right, body=[] }.
@@ -48,7 +54,7 @@ header() ->
     header(none).
 
 header(Selected) ->
-    lists:member(Selected,[home,twitter,logout,new,about]) andalso
+    lists:member(Selected,[home,twitter,login,logout,new,about]) andalso
         wf:wire(Selected, #add_class { class=selected }),
     #panel { body = [#image{image="/images/chili-small.png", 
                             class="chili_logo"},                     
@@ -64,24 +70,40 @@ menu_box() ->
     #panel { class=menu, 
              body=[#link { id=home,    url='/',           text="Home" },
                    #link { id=projects,url='/projects',   text="Projects" },
-                   #link { id=logout,  url="/logout?"++P, text="Logout" },
+                   login_logout(P),
                    #link { id=new,     url='/new',        text="New" },
                    #link { id=about,   url='/about',      text="About" }
                   ]}.
 
+
+login_logout(Path) ->
+    login_logout(Path, wf:session(authenticated)).
+
+login_logout(Path, true) ->
+    #link { id=logout, url="/logout?"++Path, text="Logout" };
+login_logout(_,_) ->
+    #link { id=login, url="#", text="Login", postback=login, delegate=?MODULE }.
+
+
+openid_box_id() ->
+    openid_box_id.
+
 openid_box() ->
     case wf:session(authenticated) of
         true ->
-            #panel { class = "openid_box",
-                     body = [wf:user()]};
+            #panel { class = "show_openid_box",
+                     id    = openid_box_id(),
+                     body  = [wf:user()]};
         _ ->
             Id = claimed_id,
-            #panel { class = "openid_box",
-                     body = [#textbox{ class    = "openid_login", 
-                                       id       = Id,
-                                       postback = {Id,raw_path()},
-                                       delegate = ?INDEX_PAGE}]}
+            #panel { class = "hide_openid_box",
+                     id    = openid_box_id(),
+                     body  = [#textbox{ class    = "openid_login", 
+                                        id       = Id,
+                                        postback = {Id,raw_path()},
+                                        delegate = ?INDEX_PAGE}]}
     end.
+
 
 logo_text() ->
     "<span class='big'>R</span>ed<span class='big'>H</span>ot<span class='big'>E</span>rlang".

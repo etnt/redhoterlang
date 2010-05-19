@@ -93,7 +93,8 @@ a.selected {color:black; background-color:#d7d8cf;}
 /*
  * OpenID box
  */
-.openid_box {margin:25px 0px -25px 0px; padding-left:5px;}
+.hide_openid_box {display:none; margin:25px 0px -25px 0px; padding-left:5px;}
+.show_openid_box {margin:25px 0px -25px 0px; padding-left:5px;}
 input.openid_login {
    background: url(http://openid.net/login-bg.gif) no-repeat;
    background-color: #fff;
